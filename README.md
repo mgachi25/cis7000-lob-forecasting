@@ -4,7 +4,7 @@ This repository organizes research notebooks for a study of **domain shift in li
 
 1. **The forecasting task** — characterizing mid-price prediction in the LOB setting.
 2. **Measuring distribution shift** — quantifying how statistical properties of LOB data change across markets, using the FI-2010 dataset as the in-distribution reference and LOBSTER (US equities) as the out-of-distribution target.
-3. **Adaptation strategies** — exploring how models can be adapted to distribution shift via finetuning, foundation models, and finetuning on synthetic data that matches the target distribution.
+3. **Adaptation strategies** — exploring how models can be adapted to distribution shift via finetuning, foundation models, and finetuning on synthetic data that is closer to the target distribution than the train.
 
 ---
 
