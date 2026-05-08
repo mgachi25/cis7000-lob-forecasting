@@ -79,15 +79,15 @@ For each of the five features (`mid_return`, `spread`, `order_imbalance`, `total
 - **Wasserstein-1 distance** — Earth Mover's Distance on sorted samples; interpretable as the minimum transport cost between distributions
 - **Moment gaps** — differences in mean, standard deviation, skewness, and excess kurtosis between the two datasets
 
-Before any metric is computed, each feature pair is standardized using the pooled median and IQR (robust to outliers), which puts the scale-heterogeneous datasets on a common footing. Each feature is then subsampled to 80,000 points (random seed 42) for consistency.
+Before any metric is computed, each feature is standardized **per-dataset** using that series' own median and IQR. This isolates distributional *shape* divergence from the scale and location differences introduced by FI-2010's z-score normalization (raw prices in LOBSTER/LOBS5 vs. dimensionless z-scores in FI-2010). Each feature is then subsampled to 80,000 points (random seed 42) for consistency.
 
 #### Key Findings
 
 All 15 pairings (3 pairs × 5 features) are statistically significant (p ≪ 0.001). The nature and magnitude of shift varies considerably by feature:
 
-- **Spread and depth** show near-complete separation (KS ≈ 1.0, JS ≈ 0.58–0.68) between FI-2010 and the other two datasets, driven largely by FI-2010's Z-score normalization collapsing the raw price scale.
-- **Mid-return and order imbalance** exhibit more moderate shift (KS 0.07–0.16), reflecting genuine microstructural differences in price dynamics and liquidity balance across markets.
-- **LOBS5 vs. LOBSTER-AAPL** shows milder divergence overall (KS 0.07 for returns, 0.16 for imbalance), suggesting the synthetic generator captures some real-market dynamics but still diverges on spread and depth.
+- **Cross-market shift (LOBSTER-AAPL vs. FI-2010):** Depth is the most divergent feature (bid KS=0.29, ask KS=0.24), reflecting genuine differences in book depth structure between US NASDAQ large-cap and Finnish Nordic small-cap equities. Spread shape shows moderate divergence (KS=0.17), while return dynamics (KS=0.08) and order imbalance (KS=0.10) are broadly similar — aggregate price dynamics and order flow balance are more market-universal than depth structure.
+- **LOBS5 vs. real data:** The synthetic generator (trained on GOOG, a US large-cap equity) shows mixed similarity. Return shape and depth shape are closer to LOBSTER-AAPL as expected (returns KS=0.07, depth KS=0.12–0.13 vs. FI-2010 KS=0.11 returns, KS=0.15–0.18 depth). However, LOBS5 order imbalance shape is closer to FI-2010 (KS=0.04) than to LOBSTER-AAPL (KS=0.11), and LOBS5 spread shape is also closer to FI-2010 (KS=0.39) than to LOBSTER (KS=0.48) — the generator does not fully replicate US equity spread clustering despite being trained on US data. Spread divergence remains the largest gap between LOBS5 and both real datasets (KS 0.39–0.48).
+- **When metrics disagree:** For LOBSTER vs. FI-2010 returns, KS=0.078 and JS=0.040 both suggest low divergence, yet Wasserstein=0.253 is notably elevated. This reflects how Wasserstein accounts for heavy tails: even when the bulk distributions overlap well, Wasserstein must "transport" probability mass across the extended tails at a real cost. For LOBS5 vs. LOBSTER bid depth, JS=0.033 implies near-identical density shapes, yet KS=0.12 and Wasserstein=0.25 flag a systematic shift — the mean gap of −0.24 IQR units confirms LOBS5 depth is uniformly lower than LOBSTER's after normalization. JS misses this because density shapes overlap strongly while the distributions are offset; KS and Wasserstein correctly identify the location gap as a meaningful divergence.
 
 #### Outputs
 
@@ -155,7 +155,7 @@ LOBS5 requires reconstructing L2 snapshots from a raw message stream (handling s
 
 #### Key Findings
 
-All 15 pairings (3 dataset pairs × 5 features) are statistically significant (p ≪ 0.001). Spread and depth show near-complete separation (KS ≈ 1.0) between FI-2010 and the other two datasets, largely due to FI-2010's z-score normalization collapsing the raw price scale. Mid-return and order imbalance exhibit more moderate shift (KS 0.07–0.16). LOBS5 vs. LOBSTER shows the mildest divergence, suggesting the synthetic generator captures some real-market dynamics but still diverges on depth and spread.
+All 15 pairings (3 dataset pairs × 5 features) are statistically significant (p ≪ 0.001). The cross-market shift (LOBSTER vs. FI-2010) is most pronounced in depth shape (KS 0.24–0.29) and moderate in spread (KS=0.17), while return dynamics and order imbalance are broadly similar across markets (KS 0.08–0.10). For formal per-feature divergence metrics and the LOBS5 comparison, see `LOB_Domain_Shift_Quantification.ipynb`.
 
 #### Outputs
 
