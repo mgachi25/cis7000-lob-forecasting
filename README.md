@@ -93,8 +93,8 @@ All 15 pairings (3 pairs × 5 features) are statistically significant (p ≪ 0.0
 
 | File | Contents |
 |---|---|
-| `cross_market_domain_shift.png` | 6-panel figure: FI-2010 vs. LOBSTER-AAPL (return KDE, tail CCDF, imbalance KDE, QQ plot, depth profiles, label distributions) |
-| `synthetic_vs_real_domain_shift.png` | 6-panel figure: LOBS5 vs. real data (distributions of all features + mean Wasserstein bar chart) |
+| `cross_market_domain_shift.png` | 6-panel figure: FI-2010 vs. LOBSTER-AAPL (return KDE, spread histogram, imbalance KDE, tail CCDF, depth profiles, KS-statistic bar) |
+| `synthetic_vs_real_domain_shift.png` | 6-panel figure: LOBS5 vs. real data (spread histogram, QQ plots for return and OI alignment, depth profiles, JS-divergence heatmap, label distribution at h=50) |
 | `dataset_summary_statistics.csv` | Per-dataset descriptive statistics |
 | `domain_shift_metrics.csv` | Full metrics table: 15 rows × 13 columns (KS, KL, JS, Wasserstein, moment gaps) |
 
