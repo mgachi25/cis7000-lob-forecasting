@@ -8,6 +8,12 @@ This repository organizes research notebooks for a study of **domain shift in li
 
 ---
 
+## Report
+
+See `LOB_FORECASTING_REPORT.pdf` for a written report of this study.
+
+---
+
 ## Datasets
 
 Three datasets are used across the notebooks:
