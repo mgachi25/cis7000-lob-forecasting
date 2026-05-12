@@ -1,4 +1,7 @@
 # [Domain Shift in Limit Order Book Forecasting](./LOB_FORECASTING_REPORT.pdf)
+(click the link above to view the written report)
+
+--
 
 This repository organizes research notebooks for a study of **domain shift in limit-order-book (LOB) data** and its consequences for mid-price forecasting. The project covers three interconnected threads:
 
