@@ -1,5 +1,5 @@
 # [Domain Shift in Limit Order Book Forecasting](./LOB_FORECASTING_REPORT.pdf)
-(click the link above to view the written report)
+_(click the link above to view the written report)_
 
 --
 
