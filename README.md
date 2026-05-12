@@ -1,16 +1,10 @@
-# Domain Shift in Limit Order Book Forecasting
+# [Domain Shift in Limit Order Book Forecasting](./LOB_FORECASTING_REPORT.pdf)
 
 This repository organizes research notebooks for a study of **domain shift in limit-order-book (LOB) data** and its consequences for mid-price forecasting. The project covers three interconnected threads:
 
 1. **The forecasting task** — characterizing mid-price prediction in the LOB setting.
 2. **Measuring distribution shift** — quantifying how statistical properties of LOB data change across markets, using the FI-2010 dataset as the in-distribution reference and LOBSTER (US equities) as the out-of-distribution target.
 3. **Adaptation strategies** — exploring how models can be adapted to distribution shift via finetuning, foundation models, and finetuning on synthetic data that is closer to the target distribution than the train.
-
----
-
-## Report
-
-See `LOB_FORECASTING_REPORT.pdf` for a written report of this study.
 
 ---
 
